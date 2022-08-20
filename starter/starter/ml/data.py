@@ -1,6 +1,24 @@
 import numpy as np
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
 
+def clean_data(df):
+    # clean data by removing space
+    # clean column name
+    column_rename = {}
+    for original_column in list(df.columns):
+        column_rename[original_column] = original_column.strip()
+
+    df.rename(columns=column_rename, inplace=True)
+
+    # clean data content
+    for column in list(df.columns):
+        if df[column].dtypes == 'object':
+            df[column] = df[column].apply(lambda x: x.strip())
+
+    # remove row with null data
+    df = df.dropna()
+
+    return df
 
 def process_data(
     X, categorical_features=[], label=None, training=True, encoder=None, lb=None

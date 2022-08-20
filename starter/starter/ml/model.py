@@ -1,5 +1,8 @@
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
+import pandas as pd
+import pytest
+from data import clean_data
 
 
 # Optional: implement hyperparameter tuning.
@@ -60,4 +63,32 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    pass
+    return model.predict(X)
+
+
+def model_performance(data, model):
+    performance = {}
+    for cat_feature in data['salary'].unique():
+        selected_data = data[data['salary'] == cat_feature]
+        preds = inference(model, selected_data)
+        precision, recall, fbeta = compute_model_metrics(selected_data['salary'], preds)
+        performance[cat_feature] = {'precision': precision,
+                                    'recall': recall,
+                                    'fbeta' : fbeta}
+    return performance
+
+
+@pytest.fixture
+def data():
+    df = pd.read_csv('./data/census.csv')
+    df = clean_data(df)
+    return df
+
+def test_na_data(data):
+    assert data.shape == data.dropna().shape, "need to remove na data"
+
+def test_data_num(data):
+    assert len(data) > 0, "data is emptly"
+
+def test_age_range(data):
+    assert data['age'].min() > 0, "age cannot be negative or zero"
