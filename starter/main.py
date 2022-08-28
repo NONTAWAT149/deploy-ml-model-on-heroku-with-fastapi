@@ -1,7 +1,7 @@
 # Put the code for your API here.
 from fastapi import FastAPI
 from pydantic import BaseModel
-from ml.model import inference
+from starter.ml.model import inference
 import pandas as pd
 
 class dataInput(BaseModel):
