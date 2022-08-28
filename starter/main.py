@@ -9,16 +9,16 @@ class dataInput(BaseModel):
     workclass: str
     fnlgt: int
     education: str
-    education-num: int
-    marital-status: str
+    education_num: int
+    marital_status: str
     occupation: ste
     relationship: str
     race: str
     sex: str
-    capital-gain: int
-    capital-loss: int
-    hours-per-week: int
-    native-country: str
+    capital_gain: int
+    capital_loss: int
+    hours_per_week: int
+    native_country: str
 
 
 app = FastAPI()
