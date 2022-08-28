@@ -4,8 +4,11 @@ from pydantic import BaseModel, Field
 from starter.ml.model import inference
 import pandas as pd
 import joblib
+import os
 
-model = joblib.load("model/model.joblib")
+print('current directory': os.getcwd())
+
+model = joblib.load("./starter/model/model.joblib")
 
 class dataInput(BaseModel):
     age: int
