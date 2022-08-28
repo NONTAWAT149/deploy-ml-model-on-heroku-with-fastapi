@@ -6,7 +6,7 @@ import pandas as pd
 import joblib
 import os
 
-print('current directory': os.getcwd())
+print('current directory', os.getcwd())
 
 model = joblib.load("./starter/model/model.joblib")
 
