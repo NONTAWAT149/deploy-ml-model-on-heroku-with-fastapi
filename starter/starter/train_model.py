@@ -9,7 +9,7 @@ from ml.data import process_data, clean_data
 from joblib import dump
 
 # Add code to load in the data.
-df = pd.read_csv('./data/census.csv')
+df = pd.read_csv('../data/census.csv')
 data = clean_data(df)
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
@@ -42,4 +42,4 @@ X_test, y_test, encoder, lb = process_data(
 
 # Train and save a model.
 trained_model = train_model(X_train, y_train)
-dump(trained_model, "./model/model.joblib")
+dump(trained_model, "../model/model.joblib")

@@ -6,7 +6,7 @@ client = TestClient(app)
 def test_get_root():
     response = client.get("/")
     assert response.status_code == 200, "response not successful"
-    assert response.json() == {"message": "ML model is ready to use"}, "wrong message gotten"
+    assert response.json() == {"message": "ML model is ready for prediction"}, "wrong message gotten"
 
 def test_post_inference_one():
     input_data = {'age': 76,
