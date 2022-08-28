@@ -21,9 +21,9 @@ jobs:
     steps:
       # Runs a single command using the runners shell
       - name: Set up Python
-        run: actions/setup-python@v1
-          with:
-            python-version: 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
 
       # Install dependency
       - name: Install dependencies
