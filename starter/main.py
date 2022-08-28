@@ -5,7 +5,7 @@ from starter.ml.model import inference
 import pandas as pd
 import joblib
 
-model = joblib.load('/model/model.joblib')
+model = joblib.load('./model/model.joblib')
 
 class dataInput(BaseModel):
     age: int
