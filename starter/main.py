@@ -37,4 +37,4 @@ async def root():
 @app.post("/prediction/")
 async def model_inference(data: dataInput):
     data = pd.DataFrame(data.dict(), index=[0])
-    return {"prediction": inference(data, model)}
+    return {"prediction": inference(model, data)}
