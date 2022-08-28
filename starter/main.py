@@ -3,6 +3,9 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 from starter.ml.model import inference
 import pandas as pd
+import joblib
+
+model = joblib.load('/model/model.joblib')
 
 class dataInput(BaseModel):
     age: int
@@ -31,4 +34,4 @@ async def root():
 @app.post("/prediction/")
 async def model_inference(data: dataInput):
     data = pd.DataFrame(data.dict(), index=[0])
-    return {"prediction": inference(data)}
+    return {"prediction": inference(data, model)}
