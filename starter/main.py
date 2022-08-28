@@ -28,7 +28,7 @@ async def root():
     return {"message": "ML model is ready for prediction"}
 
 # This allows sending of data (our TaggedItem) via POST to the API.
-@app.post("/prediction/{data}")
+@app.post("/prediction/")
 async def model_inference(data: dataInput):
     data = pd.DataFrame(list(data.values()), index=list(data.keys())).T
     return {"prediction": inference(data)}
