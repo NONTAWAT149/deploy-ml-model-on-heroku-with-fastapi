@@ -11,7 +11,7 @@ class dataInput(BaseModel):
     education: str
     education_num: int
     marital_status: str
-    occupation: ste
+    occupation: str
     relationship: str
     race: str
     sex: str
