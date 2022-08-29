@@ -11,7 +11,7 @@ print('current directory', os.getcwd())
 
 model = joblib.load("./starter/model/model.joblib")
 encoder = joblib.load("./starter/model/encoder.joblib")
-lb = joblib.load("./starter/model/ld.joblib")
+lb = joblib.load("./starter/model/lb.joblib")
 
 cat_features = [
     "workclass",
