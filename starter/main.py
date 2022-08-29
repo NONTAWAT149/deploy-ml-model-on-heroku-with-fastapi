@@ -7,27 +7,28 @@ import pandas as pd
 import joblib
 import os
 
+
 print('current directory', os.getcwd())
 
 #GitHub Action Testing
-#model = joblib.load("./starter/model/model.joblib")
-#encoder = joblib.load("./starter/model/encoder.joblib")
-#lb = joblib.load("./starter/model/lb.joblib")
+model = joblib.load("./starter/model/model.joblib")
+encoder = joblib.load("./starter/model/encoder.joblib")
+lb = joblib.load("./starter/model/lb.joblib")
 
 #Local Testing
-model = joblib.load("./model/model.joblib")
-encoder = joblib.load("./model/encoder.joblib")
-lb = joblib.load("./model/lb.joblib")
+#model = joblib.load("./model/model.joblib")
+#encoder = joblib.load("./model/encoder.joblib")
+#lb = joblib.load("./model/lb.joblib")
 
 cat_features = [
     "workclass",
     "education",
-    "marital_status",
+    "marital-status",
     "occupation",
     "relationship",
     "race",
     "sex",
-    "native_country",
+    "native-country",
 ]
 
 class dataInput(BaseModel):
@@ -61,6 +62,7 @@ async def model_inference(data: dataInput):
     x_data, _, _, _ = process_data(data,
                                     categorical_features=cat_features,
                                     training=False,
+                                    label=None,
                                     encoder=encoder,
                                     lb=lb)
     return {"prediction": inference(model, x_data)}
