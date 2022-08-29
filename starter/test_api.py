@@ -24,9 +24,9 @@ def test_post_inference_one():
                  'hours_per_week': 40,
                  'native_country': 'United-States'}
 
-    response = client.post("/prediction/", json=input_data)
-    assert response.status_code == 200, "response not successful"
-    assert response.json() == {"prediction":'>50K'}, "got wrong prediction, expect '>50K'"
+    response_post = client.post("/prediction/", json=input_data)
+    assert response_post.status_code == 200, "response not successful"
+    assert response_post.json() == {"prediction":'>50K'}, "got wrong prediction, expect '>50K'"
 
 
 def test_post_inference_two():
@@ -45,8 +45,8 @@ def test_post_inference_two():
                  'hours_per_week': 20,
                  'native_country': 'United-States'}
 
-    response = client.post("/prediction/", json=input_data)
-    assert response.status_code == 200, "response not successful"
-    assert response.json() == {"prediction":'<=50K'}, "got wrong prediction, expect '<=50K'"
+    response_post = client.post("/prediction/", json=input_data)
+    assert response_post.status_code == 200, "response not successful"
+    assert response_post.json() == {"prediction":'<=50K'}, "got wrong prediction, expect '<=50K'"
 
 
