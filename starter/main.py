@@ -10,14 +10,14 @@ import os
 print('current directory', os.getcwd())
 
 #GitHub Action Testing
-model = joblib.load("./starter/model/model.joblib")
-encoder = joblib.load("./starter/model/encoder.joblib")
-lb = joblib.load("./starter/model/lb.joblib")
+#model = joblib.load("./starter/model/model.joblib")
+#encoder = joblib.load("./starter/model/encoder.joblib")
+#lb = joblib.load("./starter/model/lb.joblib")
 
 #Local Testing
-#model = joblib.load("./model/model.joblib")
-#encoder = joblib.load("./model/encoder.joblib")
-#lb = joblib.load("./model/lb.joblib")
+model = joblib.load("./model/model.joblib")
+encoder = joblib.load("./model/encoder.joblib")
+lb = joblib.load("./model/lb.joblib")
 
 cat_features = [
     "workclass",
@@ -56,7 +56,7 @@ async def root():
 # This allows sending of data (dataInput) via POST to the API.
 @app.post("/prediction/")
 async def model_inference(data: dataInput):
-    data = data.dict()
+    data = data.dict(by_alias=True)
     data = pd.DataFrame(data=data.values(), index=data.keys()).T
     x_data, _, _, _ = process_data(data,
                                     categorical_features=cat_features,
