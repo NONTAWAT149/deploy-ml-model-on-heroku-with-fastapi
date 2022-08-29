@@ -50,7 +50,7 @@ async def root():
 # This allows sending of data (our TaggedItem) via POST to the API.
 @app.post("/prediction/")
 async def model_inference(data: dataInput):
-    data = pd.DataFrame(data.dict(), index=0)
+    data = pd.DataFrame(data=data.values(), index=data.keys()).T
     x_data, _, _, _ = process_data(data,
                                     categorical_features=cat_features,
                                     training=False,
