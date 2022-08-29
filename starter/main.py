@@ -53,7 +53,6 @@ async def model_inference(data: dataInput):
     data = pd.DataFrame(data.dict(), index=[0])
     x_data, _, _, _ = process_data(data,
                                     categorical_features=cat_features,
-                                    label="salary",
                                     training=False,
                                     encoder=encoder,
                                     lb=lb)
