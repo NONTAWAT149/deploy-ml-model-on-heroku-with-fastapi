@@ -2,6 +2,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 from starter.ml.model import inference
+from starter.ml.data import process_data
 import pandas as pd
 import joblib
 import os
@@ -9,6 +10,19 @@ import os
 print('current directory', os.getcwd())
 
 model = joblib.load("./starter/model/model.joblib")
+encoder = joblib.load("./starter/model/encoder.joblib")
+lb = joblib.load("./starter/model/ld.joblib")
+
+cat_features = [
+    "workclass",
+    "education",
+    "marital-status",
+    "occupation",
+    "relationship",
+    "race",
+    "sex",
+    "native-country",
+]
 
 class dataInput(BaseModel):
     age: int
@@ -37,4 +51,10 @@ async def root():
 @app.post("/prediction/")
 async def model_inference(data: dataInput):
     data = pd.DataFrame(data.dict(), index=[0])
-    return {"prediction": inference(model, data)}
+    x_data, _, _, _ = process_data(data,
+                                    categorical_features=cat_features,
+                                    label="salary",
+                                    training=False,
+                                    encoder=encoder,
+                                    lb=lb)
+    return {"prediction": inference(model, x_data)}

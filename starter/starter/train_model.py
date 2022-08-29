@@ -43,3 +43,5 @@ X_test, y_test, encoder, lb = process_data(
 # Train and save a model.
 trained_model = train_model(X_train, y_train)
 dump(trained_model, "../model/model.joblib")
+dump(encoder, "../model/encoder.joblib")
+dump(lb, "../model/lb.joblib")
