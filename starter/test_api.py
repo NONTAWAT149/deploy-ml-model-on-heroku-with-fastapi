@@ -25,7 +25,7 @@ def test_post_inference_one():
                  'native_country': 'United-States'}
 
     response_post = client.post("/prediction/", json=input_data)
-    assert response_post.status_code == 200, "response not successful"
+    assert response_post.status_code == 200, "response not successful with {}".format(response_post.json())
     assert response_post.json() == {"prediction":'>50K'}, "got wrong prediction, expect '>50K'"
 
 
@@ -46,7 +46,7 @@ def test_post_inference_two():
                  'native_country': 'United-States'}
 
     response_post = client.post("/prediction/", json=input_data)
-    assert response_post.status_code == 200, "response not successful"
+    assert response_post.status_code == 200, "response not successful with {}".format(response_post.json())
     assert response_post.json() == {"prediction":'<=50K'}, "got wrong prediction, expect '<=50K'"
 
 

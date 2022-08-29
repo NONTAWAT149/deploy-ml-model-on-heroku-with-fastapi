@@ -53,7 +53,7 @@ app = FastAPI()
 async def root():
     return {"message": "ML model is ready for prediction"}
 
-# This allows sending of data (our TaggedItem) via POST to the API.
+# This allows sending of data (dataInput) via POST to the API.
 @app.post("/prediction/")
 async def model_inference(data: dataInput):
     data = data.dict()
