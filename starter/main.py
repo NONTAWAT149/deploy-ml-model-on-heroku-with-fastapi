@@ -16,12 +16,12 @@ lb = joblib.load("./starter/model/lb.joblib")
 cat_features = [
     "workclass",
     "education",
-    "marital-status",
+    "marital_status",
     "occupation",
     "relationship",
     "race",
     "sex",
-    "native-country",
+    "native_country",
 ]
 
 class dataInput(BaseModel):
