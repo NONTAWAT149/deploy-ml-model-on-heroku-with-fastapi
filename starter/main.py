@@ -9,9 +9,15 @@ import os
 
 print('current directory', os.getcwd())
 
+#GitHub Action Testing
 model = joblib.load("./starter/model/model.joblib")
 encoder = joblib.load("./starter/model/encoder.joblib")
 lb = joblib.load("./starter/model/lb.joblib")
+
+#Local Testing
+#model = joblib.load("./model/model.joblib")
+#encoder = joblib.load("./model/encoder.joblib")
+#lb = joblib.load("./model/lb.joblib")
 
 cat_features = [
     "workclass",

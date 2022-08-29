@@ -13,16 +13,16 @@ def test_post_inference_one():
                  'workclass': 'Private',
                  'fnlgt': 124191,
                  'education': 'Masters',
-                 'education-num': 14,
-                 'marital-status': 'Married-civ-spouse',
+                 'education_num': 14,
+                 'marital_status': 'Married-civ-spouse',
                  'occupation': 'Exec-managerial',
                  'relationship': 'Husband',
                  'race': 'White',
                  'sex': 'Male',
-                 'capital-gain': 0,
-                 'capital-loss': 0,
-                 'hours-per-week': 40,
-                 'native-country': 'United-States'}
+                 'capital_gain': 0,
+                 'capital_loss': 0,
+                 'hours_per_week': 40,
+                 'native_country': 'United-States'}
 
     response = client.post("/prediction/", json=input_data)
     assert response.status_code == 200, "response not successful"
@@ -34,16 +34,16 @@ def test_post_inference_two():
                  'workclass': 'Private',
                  'fnlgt': 201490,
                  'education': 'HS-grad',
-                 'education-num': 9,
-                 'marital-status': 'Never-married',
+                 'education_num': 9,
+                 'marital_status': 'Never-married',
                  'occupation': 'Adm-clerical',
                  'relationship': 'Own-child',
                  'race': 'White',
                  'sex': 'Male',
-                 'capital-gain': 0,
-                 'capital-loss': 0,
-                 'hours-per-week': 20,
-                 'native-country': 'United-States'}
+                 'capital_gain': 0,
+                 'capital_loss': 0,
+                 'hours_per_week': 20,
+                 'native_country': 'United-States'}
 
     response = client.post("/prediction/", json=input_data)
     assert response.status_code == 200, "response not successful"
