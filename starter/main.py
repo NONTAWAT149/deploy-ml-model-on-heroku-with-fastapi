@@ -6,6 +6,7 @@ from starter.ml.data import process_data
 import pandas as pd
 import joblib
 import os
+from fastapi.encoders import jsonable_encoder
 
 
 print('current directory', os.getcwd())
@@ -57,7 +58,7 @@ async def root():
 # This allows sending of data (dataInput) via POST to the API.
 @app.post("/prediction/")
 async def model_inference(data: dataInput):
-    data = data.dict(by_alias=True)
+    data = jsonable_encoder(data)
     data = pd.DataFrame(data=data.values(), index=data.keys()).T
     x_data, _, _, _ = process_data(data,
                                     categorical_features=cat_features,

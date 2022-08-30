@@ -63,7 +63,12 @@ def inference(model, X):
     preds : np.array
         Predictions from the model.
     """
-    return model.predict(X)
+    prediction_value = model.predict(X)[0]
+    if prediction_value == 1:
+        prediction_message = '>50K'
+    if prediction_value == 0:
+        prediction_message = '<=50K'
+    return prediction_message
 
 
 def model_performance(data, model):
