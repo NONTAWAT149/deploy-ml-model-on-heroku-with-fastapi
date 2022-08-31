@@ -4,8 +4,8 @@ from sklearn.model_selection import train_test_split
 
 # Add the necessary imports for the starter code.
 import pandas as pd
-from ml.model import train_model
-from ml.data import process_data, clean_data
+from starter.ml import train_model
+from starter.ml import process_data, clean_data
 from joblib import dump
 
 # Add code to load in the data.
