@@ -2,7 +2,7 @@ from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
 import pytest
-from .data import clean_data
+from .data import clean_data, process_data
 
 
 # Optional: implement hyperparameter tuning.
@@ -71,29 +71,37 @@ def inference(model, X):
     return prediction_message
 
 
-def model_performance(data, model):
+def inference_dev(model, X):
+    """ Run model inferences and return the predictions.
+
+    Inputs
+    ------
+    model : ???
+        Trained machine learning model.
+    X : np.array
+        Data used for prediction.
+    Returns
+    -------
+    preds : np.array
+        Predictions from the model.
+    """
+    return model.predict(X)
+
+
+def model_performance(data, model, encoder, lb, cat_features):
     performance = {}
     for cat_feature in data['salary'].unique():
         selected_data = data[data['salary'] == cat_feature]
-        preds = inference(model, selected_data)
-        precision, recall, fbeta = compute_model_metrics(selected_data['salary'], preds)
+        X_test, y_test, _, _ = process_data(selected_data,
+                                 categorical_features=cat_features,
+                                 label="salary",
+                                 training=False,
+                                 encoder=encoder,
+                                 lb=lb)
+        preds = inference_dev(model, X_test)
+        precision, recall, fbeta = compute_model_metrics(y_test, preds)
         performance[cat_feature] = {'precision': precision,
                                     'recall': recall,
                                     'fbeta' : fbeta}
     return performance
 
-
-@pytest.fixture
-def input_data():
-    df = pd.read_csv('./data/census.csv')
-    df = clean_data(df)
-    return df
-
-def test_na_data(input_data):
-    assert input_data.shape == input_data.dropna().shape, "need to remove na data"
-
-def test_data_num(input_data):
-    assert len(input_data) > 0, "data is emptly"
-
-def test_age_range(input_data):
-    assert input_data['age'].min() > 0, "age cannot be negative or zero"

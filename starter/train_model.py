@@ -4,8 +4,8 @@ from sklearn.model_selection import train_test_split
 
 # Add the necessary imports for the starter code.
 import pandas as pd
-from starter.ml import train_model
-from starter.ml import process_data, clean_data
+from ml.model import train_model, model_performance
+from ml.data import process_data, clean_data
 from joblib import dump
 
 # Add code to load in the data.
@@ -45,3 +45,8 @@ trained_model = train_model(X_train, y_train)
 dump(trained_model, "../model/model.joblib")
 dump(encoder, "../model/encoder.joblib")
 dump(lb, "../model/lb.joblib")
+
+# Model Evaluation of testing data
+performance = model_performance(test, trained_model, encoder, lb, cat_features)
+print('model_performance: ', performance)
+pd.DataFrame(performance).to_csv('model_performance.csv')
