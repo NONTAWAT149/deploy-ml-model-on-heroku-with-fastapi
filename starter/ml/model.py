@@ -88,10 +88,10 @@ def inference_dev(model, X):
     return model.predict(X)
 
 
-def model_performance(data, model, encoder, lb, cat_features):
+def model_performance(data, model, encoder, lb, cat_features, selected_feature):
     performance = {}
-    for cat_feature in data['salary'].unique():
-        selected_data = data[data['salary'] == cat_feature]
+    for cat_feature in data[selected_feature].unique():
+        selected_data = data[data[selected_feature] == cat_feature]
         X_test, y_test, _, _ = process_data(selected_data,
                                  categorical_features=cat_features,
                                  label="salary",

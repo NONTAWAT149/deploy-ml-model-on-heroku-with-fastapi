@@ -47,6 +47,17 @@ dump(encoder, "../model/encoder.joblib")
 dump(lb, "../model/lb.joblib")
 
 # Model Evaluation of testing data
-performance = model_performance(test, trained_model, encoder, lb, cat_features)
+performance = model_performance(test,
+                                trained_model,
+                                encoder,
+                                lb,
+                                cat_features,
+                                'education')
 print('model_performance: ', performance)
-pd.DataFrame(performance).to_csv('model_performance.csv')
+
+# open file for writing
+f = open("slice_output.txt","w")
+# write file
+f.write( str(performance) )
+# close file
+f.close()
